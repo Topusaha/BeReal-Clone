@@ -34,6 +34,9 @@ class LoginViewController: UIViewController {
 
                 // Post a notification that the user has successfully logged in.
                 NotificationCenter.default.post(name: Notification.Name("login"), object: nil)
+                
+                let destinationVC = self?.storyboard?.instantiateViewController(withIdentifier: "Home") as! FeedViewController
+                self?.present(destinationVC, animated: false, completion: nil)
 
             case .failure(let error):
                 self?.showAlert(description: error.localizedDescription)
