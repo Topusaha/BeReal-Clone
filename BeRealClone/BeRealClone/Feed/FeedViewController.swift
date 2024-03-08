@@ -13,7 +13,9 @@ import AlamofireImage
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private var posts = [Post]() {
         didSet {
-            feed.reloadData()
+            DispatchQueue.main.async {
+                        self.feed.reloadData()
+                    }
         }
     }
     
@@ -94,3 +96,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 
 }
+
+
+
