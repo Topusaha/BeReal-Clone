@@ -9,16 +9,28 @@ import UIKit
 import ParseSwift
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var posts : [Post] = []
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "Post" // Replace with the actual identifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-
+        
+        
+        let cellIdentifier = "PostCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! PostTableViewCell
+        
+        // Add picture and metadata afterwards 
+        let rowData = posts[indexPath.row]
+        cell.captain.text = rowData.captain
+    
         return cell
     }
+    
+    
     
 
    
