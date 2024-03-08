@@ -15,7 +15,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         didSet {
             DispatchQueue.main.async {
                         self.feed.reloadData()
-                    }
+            }
         }
     }
     
