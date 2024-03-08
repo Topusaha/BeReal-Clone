@@ -7,10 +7,38 @@
 
 import UIKit
 import ParseSwift
+import Alamofire
+import AlamofireImage
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    private var posts = [Post]() {
+        didSet {
+            feed.reloadData()
+        }
+    }
     
-    var posts : [Post] = []
+    func queryPosts() {
+        let query = Post.query()
+            .include("user")
+            .order([.descending("createdAt")])
+
+        query.find { [weak self] result in
+            switch result {
+            case .success(let posts):
+                self?.posts = posts
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        queryPosts()
+    }
+    
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -20,13 +48,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cellIdentifier = "PostCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! PostTableViewCell
-        
-        // Add picture and metadata afterwards 
-        let rowData = posts[indexPath.row]
-        cell.captain.text = rowData.captain
-    
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: posts[indexPath.row])
         return cell
     }
     
@@ -41,6 +66,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         feed.delegate = self
         feed.dataSource = self
+        feed.allowsSelection = false
+
 
     }
     

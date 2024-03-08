@@ -61,8 +61,7 @@ class SignUpViewController: UIViewController {
             }
         }
         
-        let destinationVC = self.storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
-        self.present(destinationVC, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
     
