@@ -11,7 +11,7 @@ import Alamofire
 class PostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var locationAndTime: UILabel!
+    @IBOutlet weak var locationAndDate: UILabel!
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var captain: UILabel!
     
@@ -42,7 +42,7 @@ class PostTableViewCell: UITableViewCell {
         
         self.captain.text = post.captain
         if let date = post.createdAt {
-            self.locationAndTime.text = DateFormatter.postFormatter.string(from: date)
+            self.locationAndDate.text = DateFormatter.postFormatter.string(from: date)
         }
     }
     

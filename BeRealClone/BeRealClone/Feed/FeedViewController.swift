@@ -15,9 +15,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         didSet {
             DispatchQueue.main.async {
                         self.feed.reloadData()
-            }
+                }
         }
     }
+    
+    private let refreshControl = UIRefreshControl()
+
     
     func queryPosts() {
         let query = Post.query()
@@ -38,6 +41,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
 
         queryPosts()
+        
+        if #available(iOS 10.0, *) {
+            feed.refreshControl = refreshControl
+        } else {
+            feed.addSubview(refreshControl)
+        }
     }
     
     
@@ -74,25 +83,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func pressedLogOut(_ sender: Any) {
-        
-        User.logout { [weak self] result in
-            
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    let destinationVC = self?.storyboard?.instantiateViewController(withIdentifier: "login") as! LoginViewController
-                    self?.present(destinationVC, animated: false, completion: nil)
-                }
-                           
-            case .failure(let error):
-                print("❌ Log out error: \(error)")
-            }
-            
-        }
-        
-        
+        showConfirmLogoutAlert()
+
     }
     
+    private func showConfirmLogoutAlert() {
+        let alertController = UIAlertController(title: "Log out of your account?", message: nil, preferredStyle: .alert)
+        let logOutAction = UIAlertAction(title: "Log out", style: .destructive) { _ in
+            NotificationCenter.default.post(name: Notification.Name("logout"), object: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(logOutAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
     
 
 }
