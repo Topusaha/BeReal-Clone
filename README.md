@@ -4,7 +4,7 @@ Submitted by: **Topu Sahae**
 
 **BeReal. Clone** is an app that allows users to take pictures at random times of the day and post them for their followers to see.
 
-Time spent: **5** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
