@@ -99,12 +99,12 @@
 				04B88E4F2B9B928D00ED540F /* Feed */,
 				044F72992B99F9F400609474 /* AppDelegate.swift */,
 				044F729B2B99F9F400609474 /* SceneDelegate.swift */,
+				0480CC342B9B9BCE00EEBE97 /* PostViewController.swift */,
+				0480CC362B9BB04A00EEBE97 /* DateFormatter.swift */,
 				044F729F2B99F9F400609474 /* Main.storyboard */,
 				044F72A22B99F9F400609474 /* Assets.xcassets */,
 				044F72A42B99F9F400609474 /* LaunchScreen.storyboard */,
 				044F72A72B99F9F400609474 /* Info.plist */,
-				0480CC342B9B9BCE00EEBE97 /* PostViewController.swift */,
-				0480CC362B9BB04A00EEBE97 /* DateFormatter.swift */,
 			);
 			path = BeRealClone;
 			sourceTree = "<group>";
@@ -363,6 +363,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -391,6 +392,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
