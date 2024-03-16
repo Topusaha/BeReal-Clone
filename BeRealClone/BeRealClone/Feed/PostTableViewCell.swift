@@ -16,6 +16,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var captain: UILabel!
     
     private var imageDataRequest: DataRequest?
+    @IBOutlet private weak var blurView: UIVisualEffectView!
+
     
     
     func configure(with post: Post) {
@@ -38,6 +40,30 @@ class PostTableViewCell: UITableViewCell {
                     break
                 }
             }
+            
+            
+             
+            // TODO: Pt 2 - Show/hide blur view
+            if let currentUser = User.current,
+
+                // Get the date the user last shared a post (cast to Date).
+               let lastPostedDate = currentUser.lastPostedDate,
+
+                // Get the date the given post was created.
+               let postCreatedDate = post.createdAt,
+
+                // Get the difference in hours between when the given post was created and the current user last posted.
+               let diffHours = Calendar.current.dateComponents([.hour], from: postCreatedDate, to: lastPostedDate).hour {
+
+                // Hide the blur view if the given post was created within 24 hours of the current user's last post. (before or after)
+                blurView.isHidden = lastPostedDate != Date()
+                
+            } else {
+
+                // Default to blur if we can't get or compute the date's above for some reason.
+                blurView.isHidden = false
+            }
+            
         }
         
         self.captain.text = post.captain

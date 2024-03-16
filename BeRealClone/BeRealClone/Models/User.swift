@@ -30,4 +30,8 @@ struct User: ParseUser {
     var ACL: ParseSwift.ParseACL?
     
     
+    var lastPostedDate: Date?
+
+    
+    
 }
