@@ -9,6 +9,7 @@ import UIKit
 import ParseSwift
 import Alamofire
 import AlamofireImage
+import UserNotifications
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -91,6 +92,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkForPremissions()
         
         feed.delegate = self
         feed.dataSource = self
@@ -101,7 +103,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func pressedLogOut(_ sender: Any) {
+        disableNotifications()
         showConfirmLogoutAlert()
+        
 
     }
     
@@ -115,8 +119,74 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
-    
+}
 
+
+// for notifications methods
+extension FeedViewController {
+    
+    func checkForPremissions() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings {settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                self.dispatchNotification()
+            
+            case .denied:
+                print("denied")
+            
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) {didAllow, error in
+                    if didAllow {
+                        self.dispatchNotification()
+                    }
+                }
+                
+            default:
+                return
+            }
+        }
+    }
+    
+    func dispatchNotification() {
+        let id = "Daily Notification"
+        let title: String = "Time to Post"
+        let body: String = "Come see what your firsts are posting!"
+        
+        let hour = 12
+        let minute = 01
+        let isDaily = true
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        
+        let calendar = Calendar.current
+        var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { error in
+            if let error = error {
+                print("Error adding notification request: \(error.localizedDescription)")
+            } else {
+                print("Notification request added successfully.")
+                }
+            }
+    }
+    
+    func disableNotifications() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.removeAllPendingNotificationRequests()
+        notificationCenter.removeAllDeliveredNotifications()
+    }
+    
 }
 
 

@@ -63,7 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: Constants.feedNavigationControllerIdentifier)
     }
     
-    private func logOut() {
+    private func logOut() {        
         User.logout { [weak self] result in
 
             switch result {

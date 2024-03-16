@@ -144,5 +144,4 @@ extension PostViewController: UIImagePickerControllerDelegate & UINavigationCont
         uploadedImage.image = image
         pickedImage = image
     }
-    
 }

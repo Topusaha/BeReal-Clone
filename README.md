@@ -19,15 +19,15 @@ The following **required** functionality is completed:
 - [X] User can launch camera to take photo instead of photo library
 - [ ] Users can intereact with posts via comments, comments will have user data such as username and name
 - [ ] Posts have a time and location attached to them
-- [ ] Users are not able to see other photos until they post their own (within 24 hours)    
+- [X] Users are not able to see other photos until they post their own (within 24 hours)    
  
  
 The following **optional** features are implemented:
 
-- [ ] Users can pull to refresh their feed and see a loading indicator
+- [X] Users can pull to refresh their feed and see a loading indicator
 - [ ] Users can infinite-scroll in their feed to see past the 10 most recent photos
 - [X] User stays logged in when app is closed and open again	
-- [ ] User receive notifcation when it is time to post
+- [X] User receive notifcation when it is time to post
 
 
 ## Video Walkthrough
