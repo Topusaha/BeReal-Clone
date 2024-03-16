@@ -153,8 +153,8 @@ extension FeedViewController {
         let title: String = "Time to Post"
         let body: String = "Come see what your firsts are posting!"
         
-        let hour = 12
-        let minute = 01
+        let hour = 0
+        let minute = 08
         let isDaily = true
         
         let notificationCenter = UNUserNotificationCenter.current()
